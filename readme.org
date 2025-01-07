@@ -6,7 +6,17 @@ structure by implementing a generic wrapper type. It targets use cases for Robot
 Operating System (ROS), however it can also work standalone. More information
 about this project and library can be found in [[file:doc/thesis.pdf][my Bachelor's Thesis]].
 
-* Blackbox Function Example
+** Features
+- Wrapper for Tracking Generic Objects
+- Support Nested Attributes and Classes
+- Provenance Tree Generation
+- Tree Inversion and Evaluation
+- Operator Chaining
+- Data Serialization
+- Source Location Tracking
+- Node Monitoring for Wrapped Messages
+
+** Blackbox Function Example
 
 You can calculate the required input value for a given output value of some pure
 functions of which the order of the operations does not depend on the input
@@ -65,6 +75,6 @@ We calculated the result by taking track of the operations in a provenance tree,
 reversed the expression and evaluated the reversed expression using the target
 value. The result is the parameter value that leads to the target value.
 
-* ROS Node Monitor
+** ROS Node Monitor
 
 [[./doc/img/monitor.png]]
