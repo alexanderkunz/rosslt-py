@@ -1,0 +1,15 @@
+#+options: toc:nil
+#+title: rosslt-py
+
+* Description
+
+This project was created as part of my bachelors thesis. It allows provenance
+tracking for generic objects and their attribute structure by implementing a
+generic wrapper type. More information about this project and library can be
+found in [[file:doc/thesis.pdf][my thesis]].
+
+* TODO Usage
+
+* TODO Blackbox Example
+
+* TODO ROS Node Monitor
