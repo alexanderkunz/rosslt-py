@@ -22,8 +22,11 @@ class Tracked:
         if location:
 
             # parse header
-            if isinstance(location, LocationHeader):
-                location = Location.from_header(location)
+            try:
+                if isinstance(location, LocationHeader):
+                    location = Location.from_header(location)
+            except NameError:
+                pass
 
             # apply map
             self._location = location
