@@ -1,0 +1,4 @@
+int32 location
+---
+bool valid
+string value
