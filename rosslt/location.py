@@ -1,6 +1,11 @@
 import rosslt
-import rosslt_py_msgs.msg
-import rosslt_py_msgs.srv
+
+# optional dependencies
+try:
+    import rosslt_py_msgs.msg
+    import rosslt_py_msgs.srv
+except ModuleNotFoundError:
+    pass
 
 
 class Location:
@@ -186,7 +191,8 @@ class Location:
         # forward to content getter
         return self.content_get(name)
 
-    def header_write(self, header: rosslt_py_msgs.msg.LocationHeader, parent=0, name=""):
+    # header: rosslt_py_msgs.msg.LocationHeader
+    def header_write(self, header, parent=0, name=""):
 
         # get next index
         loc_index = len(header.locations)
@@ -216,7 +222,8 @@ class Location:
                 # add content path and recurse
                 item.header_write(header, parent, name)
 
-    def header_create(self) -> rosslt_py_msgs.msg.LocationHeader:
+    #  -> rosslt_py_msgs.msg.LocationHeader
+    def header_create(self):
 
         # recursively fill with location tree
         header = rosslt_py_msgs.msg.LocationHeader()
@@ -236,8 +243,9 @@ class Location:
             expr=self.expr.to_message()
         )
 
+    # msg: rosslt_py_msgs.msg.Location
     @staticmethod
-    def from_message(msg: rosslt_py_msgs.msg.Location, node):
+    def from_message(msg, node):
 
         # create location from message data
         return Location(
@@ -246,8 +254,9 @@ class Location:
             expr=rosslt.Expression.from_message(msg.expr)
         )
 
+    # msg: rosslt_py_msgs.msg.LocationHeader
     @staticmethod
-    def from_header(msg: rosslt_py_msgs.msg.LocationHeader):
+    def from_header(msg):
 
         # find root location
         if not len(msg.locations):

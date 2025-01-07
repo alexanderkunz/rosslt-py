@@ -1,7 +1,12 @@
 import traceback
 import rosslt
-from rclpy.node import Node
-from rclpy.logging import get_logger
+
+# optional dependencies
+try:
+    from rclpy.node import Node
+    from rclpy.logging import get_logger
+except ModuleNotFoundError:
+    pass
 
 LOG = get_logger(__name__)
 

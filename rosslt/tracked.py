@@ -1,8 +1,13 @@
 import copy
 import math
 import rosslt
-from rosslt_py_msgs.msg import LocationHeader
 from rosslt import Location
+
+# optional dependencies
+try:
+    from rosslt_py_msgs.msg import LocationHeader
+except ModuleNotFoundError:
+    pass
 
 
 class Tracked:

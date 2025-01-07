@@ -1,18 +1,24 @@
 import rosslt
-import rosslt_py_msgs.msg
-import rosslt_py_msgs.srv
-import rclpy.qos
-import rclpy.node
-import rclpy.logging
-import rclpy.callback_groups
-from rclpy.logging import get_logger
+
+# optional dependencies
+try:
+    import rosslt_py_msgs.msg
+    import rosslt_py_msgs.srv
+    import rclpy.qos
+    import rclpy.node
+    import rclpy.logging
+    import rclpy.callback_groups
+    from rclpy.logging import get_logger
+except ModuleNotFoundError:
+    from logging import getLogger as get_logger
 
 LOG = get_logger(__name__)
 
 
 class LocationManager:
 
-    def __init__(self, node: rclpy.node.Node):
+    # node: rclpy.node.Node
+    def __init__(self, node):
         self.node = node
         self.locations = []
         self.location_map = {}
@@ -71,7 +77,8 @@ class LocationManager:
         # pass resulting location
         return loc
 
-    def slt_set(self, msg: rosslt_py_msgs.msg.SetValue):
+    # msg: rosslt_py_msgs.msg.SetValue
+    def slt_set(self, msg):
 
         # check for same node
         if msg.node == self.node.get_name():

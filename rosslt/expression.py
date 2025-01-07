@@ -3,7 +3,12 @@ from typing import Iterable
 from struct import pack, unpack
 import zlib
 import rosslt
-import rosslt_py_msgs.msg
+
+# optional dependencies
+try:
+    import rosslt_py_msgs.msg
+except ModuleNotFoundError:
+    pass
 
 
 class ExpressionMsgElement:
@@ -459,7 +464,7 @@ class Expression:
             data_size=data_size)
 
     @staticmethod
-    def from_message(msg: rosslt_py_msgs.msg.Expression):
+    def from_message(msg): # rosslt_py_msgs.msg.Expression
 
         # lazy load using message
         return Expression(packed=msg)
