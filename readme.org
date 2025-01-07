@@ -1,15 +1,68 @@
 #+options: toc:nil
 #+title: rosslt-py
 
-* Description
-
 This project was created as part of my bachelors thesis. It allows provenance
 tracking for generic objects and their attribute structure by implementing a
 generic wrapper type. More information about this project and library can be
 found in [[file:doc/thesis.pdf][my thesis]].
 
-* TODO Usage
+* Blackbox Function Example
 
-* TODO Blackbox Example
+You can calculate the required input value for a given output value of some pure
+functions of which the order of the operations does not depend on the input
+value.
+
+#+begin_src python
+
+# simple example function
+def blackbox_simple(x):
+    return (x + 7) / 2
+
+# complex example function of unknown behavior
+def blackbox_complex(x):
+    from random import Random
+    rng = Random(1337)
+    while rng.random() < 0.9:
+        choice = rng.randint(0, 8)
+        val = rng.random() * 10
+        if choice == 0:
+            x = x + val
+        elif choice == 1:
+            x = x - val
+        elif choice == 2:
+            x = x * (val + 1)
+        elif choice == 3:
+            x = x / (val + 1)
+        elif choice == 4:
+            x += val
+        elif choice == 5:
+            x -= val
+        elif choice == 6:
+            x *= (val + 1)
+        elif choice == 7:
+            x /= (val + 1)
+        elif choice == 8:
+            x = x ** 0.75
+    return x
+
+# load rosslt library
+from rosslt import Tracked
+
+# reversing simple blackbox
+param = blackbox_simple(Tracked(0.0)).get_expression().reverse()(42.0)
+print(f"blackbox_simple({param}) = {blackbox_simple(param)}")
+
+# reversing complex blackbox
+param = blackbox_complex(Tracked(0.0)).get_expression().reverse()(42.0)
+print(f"blackbox_complex({param}) = {blackbox_complex(param)}")
+
+# output:
+# blackbox_simple(77.0) = 42.0
+# blackbox_complex(13.231650832969262) = 42.0
+#+end_src
+
+We calculated the result by taking track of the operations in a provenance tree,
+reversed the expression and evaluated the reversed expression using the target
+value. The result is the parameter value that leads to the target value.
 
 * TODO ROS Node Monitor
