@@ -1,10 +1,10 @@
 #+options: toc:nil
 #+title: rosslt-py
 
-This project was created as part of my bachelors thesis. It allows provenance
-tracking for generic objects and their attribute structure by implementing a
-generic wrapper type. More information about this project and library can be
-found in [[file:doc/thesis.pdf][my thesis]].
+This project allows provenance tracking for generic objects and their attribute
+structure by implementing a generic wrapper type. It targets use cases for Robot
+Operating System (ROS), however it can also work standalone. More information
+about this project and library can be found in [[file:doc/thesis.pdf][my Bachelor's Thesis]].
 
 * Blackbox Function Example
 
@@ -65,4 +65,6 @@ We calculated the result by taking track of the operations in a provenance tree,
 reversed the expression and evaluated the reversed expression using the target
 value. The result is the parameter value that leads to the target value.
 
-* TODO ROS Node Monitor
+* ROS Node Monitor
+
+[[./doc/img/monitor.png]]
